@@ -5,6 +5,7 @@ from typing import Optional
 from app.utils import get_by_email
 from datetime import datetime
 
+
 # function to create a user/ Signup
 def create_user(db: Session, data: CustomerCreate | VendorCreate) -> User:
     """
@@ -19,7 +20,7 @@ def create_user(db: Session, data: CustomerCreate | VendorCreate) -> User:
         hashed_password=get_hashed_password(data.password),
         business_name=getattr(data, "business_name", None),
         business_type=getattr(data, "business_type", None),
-        created_at=datetime.utcnow()
+        created_at=datetime.utcnow(),
     )
     db.add(new_user)
     db.commit()
@@ -28,9 +29,7 @@ def create_user(db: Session, data: CustomerCreate | VendorCreate) -> User:
 
 
 # Function to Login
-def user_authenticate(
-    session: Session, *, email: str, password: str
-) -> Optional[User]:
+def user_authenticate(session: Session, *, email: str, password: str) -> Optional[User]:
     # get account by email
     user = get_by_email(session, email)
     if not user:
