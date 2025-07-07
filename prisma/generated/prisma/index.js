@@ -87,9 +87,6 @@ Prisma.NullTypes = {
  * Enums
  */
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
-  ReadUncommitted: 'ReadUncommitted',
-  ReadCommitted: 'ReadCommitted',
-  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 });
 
@@ -142,11 +139,6 @@ exports.Prisma.AppointMentScalarFieldEnum = {
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
-};
-
-exports.Prisma.QueryMode = {
-  default: 'default',
-  insensitive: 'insensitive'
 };
 
 exports.Prisma.NullsOrder = {
@@ -207,17 +199,17 @@ const config = {
   "datasourceNames": [
     "db"
   ],
-  "activeProvider": "postgresql",
+  "activeProvider": "sqlite",
   "inlineDatasources": {
     "db": {
       "url": {
-        "fromEnvVar": "DATABASE_URL",
-        "value": null
+        "fromEnvVar": null,
+        "value": "file:./dev.db"
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nenum AccountType {\n  USER\n  VENDOR\n}\n\nenum BusinessType {\n  BeautyProfessional\n  LocalProducts\n}\n\nmodel UserSession {\n  id           String    @id @default(uuid())\n  accountId    String    @map(\"account_id\")\n  expiration   DateTime\n  fcmToken     String?   @map(\"fcm_token\")\n  refreshToken String?   @map(\"refresh_token\")\n  createdAt    DateTime  @default(now()) @map(\"created_at\")\n  lastSignedIn DateTime? @updatedAt @map(\"last_signed_in\")\n\n  account Account @relation(fields: [accountId], references: [id], onDelete: Cascade)\n\n  @@index([accountId])\n  @@map(\"user_sessions\")\n}\n\nmodel Account {\n  id           String        @id @default(uuid())\n  name         String        @map(\"name\")\n  email        String?       @unique\n  phoneNumber  String        @unique @map(\"phone_number\")\n  password     String?\n  avatarUrl    String?       @map(\"avatar_url\")\n  rating       Decimal       @default(0)\n  type         AccountType   @default(USER)\n  businessName String?       @map(\"business_name\") // For vendors\n  businessType BusinessType? @map(\"business_type\") // For vendors\n  createdAt    DateTime      @default(now()) @map(\"created_at\")\n  updatedAt    DateTime      @updatedAt @map(\"updated_at\")\n\n  sessions             UserSession[]\n  services             VendorService[] @relation(\"VendorServices\")\n  appointmentsAsUser   AppointMent[]   @relation(\"UserAppointments\")\n  appointmentsAsVendor AppointMent[]   @relation(\"VendorAppointments\")\n\n  @@index([email])\n  @@index([phoneNumber])\n  @@map(\"accounts\")\n}\n\nmodel VendorService {\n  id        String   @id @default(uuid())\n  name      String   @map(\"name\")\n  imageUrl  String?  @map(\"image_url\")\n  price     Decimal\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  vendor   Account @relation(\"VendorServices\", fields: [vendorId], references: [id], onDelete: Cascade)\n  vendorId String\n\n  @@map(\"vendor_services\")\n}\n\nmodel AppointMent {\n  id        String   @id @default(uuid())\n  time      DateTime\n  opened    Boolean\n  note      String?\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  userId   String\n  vendorId String\n\n  user   Account @relation(\"UserAppointments\", fields: [userId], references: [id], onDelete: Cascade)\n  vendor Account @relation(\"VendorAppointments\", fields: [vendorId], references: [id], onDelete: Cascade)\n\n  @@map(\"appointments\")\n}\n",
-  "inlineSchemaHash": "cb9fcbc6d2d2c187875e6e2d0ddabf719910b9eab8f7b110f8c7fa7a94644c94",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = \"file:./dev.db\"\n}\n\nenum AccountType {\n  USER\n  VENDOR\n}\n\nenum BusinessType {\n  BeautyProfessional\n  LocalProducts\n}\n\nmodel UserSession {\n  id           String    @id @default(uuid())\n  accountId    String    @map(\"account_id\")\n  expiration   DateTime\n  fcmToken     String?   @map(\"fcm_token\")\n  refreshToken String?   @map(\"refresh_token\")\n  createdAt    DateTime  @default(now()) @map(\"created_at\")\n  lastSignedIn DateTime? @updatedAt @map(\"last_signed_in\")\n\n  account Account @relation(fields: [accountId], references: [id], onDelete: Cascade)\n\n  @@index([accountId])\n  @@map(\"user_sessions\")\n}\n\nmodel Account {\n  id           String        @id @default(uuid())\n  name         String        @map(\"name\")\n  email        String?       @unique\n  phoneNumber  String        @unique @map(\"phone_number\")\n  password     String?\n  avatarUrl    String?       @map(\"avatar_url\")\n  rating       Decimal       @default(0)\n  type         AccountType   @default(USER)\n  businessName String?       @map(\"business_name\") // For vendors\n  businessType BusinessType? @map(\"business_type\") // For vendors\n  createdAt    DateTime      @default(now()) @map(\"created_at\")\n  updatedAt    DateTime      @updatedAt @map(\"updated_at\")\n\n  sessions             UserSession[]\n  services             VendorService[] @relation(\"VendorServices\")\n  appointmentsAsUser   AppointMent[]   @relation(\"UserAppointments\")\n  appointmentsAsVendor AppointMent[]   @relation(\"VendorAppointments\")\n\n  @@index([email])\n  @@index([phoneNumber])\n  @@map(\"accounts\")\n}\n\nmodel VendorService {\n  id        String   @id @default(uuid())\n  name      String   @map(\"name\")\n  imageUrl  String?  @map(\"image_url\")\n  price     Decimal\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  vendor   Account @relation(\"VendorServices\", fields: [vendorId], references: [id], onDelete: Cascade)\n  vendorId String\n\n  @@map(\"vendor_services\")\n}\n\nmodel AppointMent {\n  id        String   @id @default(uuid())\n  time      DateTime\n  opened    Boolean\n  note      String?\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  userId   String\n  vendorId String\n\n  user   Account @relation(\"UserAppointments\", fields: [userId], references: [id], onDelete: Cascade)\n  vendor Account @relation(\"VendorAppointments\", fields: [vendorId], references: [id], onDelete: Cascade)\n\n  @@map(\"appointments\")\n}\n",
+  "inlineSchemaHash": "5ccf93beb4d6f77c402daa95a9664444c8a1d7c0b339c2af8e8fd2db570f63a0",
   "copyEngine": true
 }
 
