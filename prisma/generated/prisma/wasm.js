@@ -173,8 +173,8 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 exports.AccountType = exports.$Enums.AccountType = {
-  USER: 'USER',
-  VENDOR: 'VENDOR'
+  Customer: 'Customer',
+  Vendor: 'Vendor'
 };
 
 exports.BusinessType = exports.$Enums.BusinessType = {

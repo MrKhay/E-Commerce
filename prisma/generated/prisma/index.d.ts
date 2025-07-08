@@ -39,8 +39,8 @@ export type AppointMent = $Result.DefaultSelection<Prisma.$AppointMentPayload>
  */
 export namespace $Enums {
   export const AccountType: {
-  USER: 'USER',
-  VENDOR: 'VENDOR'
+  Customer: 'Customer',
+  Vendor: 'Vendor'
 };
 
 export type AccountType = (typeof AccountType)[keyof typeof AccountType]
@@ -6331,7 +6331,7 @@ export namespace Prisma {
     password?: string | null
     avatarUrl?: string | null
     rating?: Decimal | DecimalJsLike | number | string
-    type?: $Enums.AccountType
+    type: $Enums.AccountType
     businessName?: string | null
     businessType?: $Enums.BusinessType | null
     createdAt?: Date | string
@@ -6350,7 +6350,7 @@ export namespace Prisma {
     password?: string | null
     avatarUrl?: string | null
     rating?: Decimal | DecimalJsLike | number | string
-    type?: $Enums.AccountType
+    type: $Enums.AccountType
     businessName?: string | null
     businessType?: $Enums.BusinessType | null
     createdAt?: Date | string
@@ -6407,7 +6407,7 @@ export namespace Prisma {
     password?: string | null
     avatarUrl?: string | null
     rating?: Decimal | DecimalJsLike | number | string
-    type?: $Enums.AccountType
+    type: $Enums.AccountType
     businessName?: string | null
     businessType?: $Enums.BusinessType | null
     createdAt?: Date | string
@@ -7444,7 +7444,7 @@ export namespace Prisma {
     password?: string | null
     avatarUrl?: string | null
     rating?: Decimal | DecimalJsLike | number | string
-    type?: $Enums.AccountType
+    type: $Enums.AccountType
     businessName?: string | null
     businessType?: $Enums.BusinessType | null
     createdAt?: Date | string
@@ -7462,7 +7462,7 @@ export namespace Prisma {
     password?: string | null
     avatarUrl?: string | null
     rating?: Decimal | DecimalJsLike | number | string
-    type?: $Enums.AccountType
+    type: $Enums.AccountType
     businessName?: string | null
     businessType?: $Enums.BusinessType | null
     createdAt?: Date | string
@@ -7748,7 +7748,7 @@ export namespace Prisma {
     password?: string | null
     avatarUrl?: string | null
     rating?: Decimal | DecimalJsLike | number | string
-    type?: $Enums.AccountType
+    type: $Enums.AccountType
     businessName?: string | null
     businessType?: $Enums.BusinessType | null
     createdAt?: Date | string
@@ -7766,7 +7766,7 @@ export namespace Prisma {
     password?: string | null
     avatarUrl?: string | null
     rating?: Decimal | DecimalJsLike | number | string
-    type?: $Enums.AccountType
+    type: $Enums.AccountType
     businessName?: string | null
     businessType?: $Enums.BusinessType | null
     createdAt?: Date | string
@@ -7836,7 +7836,7 @@ export namespace Prisma {
     password?: string | null
     avatarUrl?: string | null
     rating?: Decimal | DecimalJsLike | number | string
-    type?: $Enums.AccountType
+    type: $Enums.AccountType
     businessName?: string | null
     businessType?: $Enums.BusinessType | null
     createdAt?: Date | string
@@ -7854,7 +7854,7 @@ export namespace Prisma {
     password?: string | null
     avatarUrl?: string | null
     rating?: Decimal | DecimalJsLike | number | string
-    type?: $Enums.AccountType
+    type: $Enums.AccountType
     businessName?: string | null
     businessType?: $Enums.BusinessType | null
     createdAt?: Date | string
@@ -7877,7 +7877,7 @@ export namespace Prisma {
     password?: string | null
     avatarUrl?: string | null
     rating?: Decimal | DecimalJsLike | number | string
-    type?: $Enums.AccountType
+    type: $Enums.AccountType
     businessName?: string | null
     businessType?: $Enums.BusinessType | null
     createdAt?: Date | string
@@ -7895,7 +7895,7 @@ export namespace Prisma {
     password?: string | null
     avatarUrl?: string | null
     rating?: Decimal | DecimalJsLike | number | string
-    type?: $Enums.AccountType
+    type: $Enums.AccountType
     businessName?: string | null
     businessType?: $Enums.BusinessType | null
     createdAt?: Date | string

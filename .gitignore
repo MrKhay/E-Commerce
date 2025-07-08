@@ -6,3 +6,5 @@ node_modules
 prisma/schema/dev.db
 prisma/schema/migrations
 prisma/generated
+prisma/generated/
+prisma/generated/prisma/edge.js

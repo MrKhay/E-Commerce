@@ -115,6 +115,84 @@ AccountRoute.get(
   })
 );
 
+AccountRoute.patch(
+  "/",
+  catchSystemRouteError(async (req, res) => {
+    const accountId: string = req.store.get(ACCOUNT_ID_KEY);
+    const { name, email, phone } = req.body;
+
+    const account = await prismaClient.account.update({
+      where: {
+        id: accountId,
+      },
+      data: {
+        name: name,
+        email: email,
+        phoneNumber: phone,
+      },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        phoneNumber: true,
+        avatarUrl: true,
+        type: true,
+        businessName: true,
+        businessType: true,
+        rating: true,
+        createdAt: true,
+        services: {
+          select: {
+            id: true,
+            name: true,
+            imageUrl: true,
+            price: true,
+            createdAt: true,
+          },
+        },
+        appointmentsAsUser: {
+          select: {
+            id: true,
+            time: true,
+            opened: true,
+            createdAt: true,
+            vendor: {
+              select: {
+                id: true,
+                name: true,
+                email: true,
+                phoneNumber: true,
+              },
+            },
+          },
+        },
+        appointmentsAsVendor: {
+          select: {
+            id: true,
+            time: true,
+            opened: true,
+            createdAt: true,
+            user: {
+              select: {
+                id: true,
+                name: true,
+                email: true,
+                phoneNumber: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    res.status(200).json(
+      Response.success({
+        ...account,
+      })
+    );
+  })
+);
+
 export default AccountRoute;
 
 /**

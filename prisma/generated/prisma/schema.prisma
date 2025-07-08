@@ -12,8 +12,8 @@ datasource db {
 }
 
 enum AccountType {
-  USER
-  VENDOR
+  Customer
+  Vendor
 }
 
 enum BusinessType {
@@ -44,7 +44,7 @@ model Account {
   password     String?
   avatarUrl    String?       @map("avatar_url")
   rating       Decimal       @default(0)
-  type         AccountType   @default(USER)
+  type         AccountType
   businessName String?       @map("business_name") // For vendors
   businessType BusinessType? @map("business_type") // For vendors
   createdAt    DateTime      @default(now()) @map("created_at")
