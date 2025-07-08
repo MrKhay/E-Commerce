@@ -5,7 +5,9 @@ import * as bcrypt from "bcrypt";
 import * as uuid from "uuid";
 import { ErrorType, handleSystemError } from "../constants";
 
-const JWT_SECRET = env.JWT_SECRET!;
+// NOT IDEAL BUT SHOULD DO
+const JWT_SECRET =
+  "vcpyjkscwiuexksajtjblwkazspqnzkpgjocxahseglossmqhakgcowkpjgiohvhpteyqbsgxqhqklbmjinlvlhgqjjwwnhsrllceyhmfsoaeigjglcmvzedeswmzjxnmndsjdsmmsd879qnmzxjayuoieq";
 
 export const respondWithError = (
   res: Response,
