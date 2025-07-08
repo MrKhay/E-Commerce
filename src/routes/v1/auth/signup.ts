@@ -7,11 +7,8 @@ import {
   generateJwtToken,
   prismaClient,
 } from "../../../utility";
-import { addDays, addMonths } from "date-fns";
-import {
-  ACCESS_TOKEN_EXPIRATION_DURATION,
-  EMAIL_TOKEN_EXPIRATION_DURATION,
-} from "../../../constants/values";
+import { addDays } from "date-fns";
+import { ACCESS_TOKEN_EXPIRATION_DURATION } from "../../../constants/values";
 import { $Enums } from "../../../../prisma/generated/prisma/client";
 
 const SignUpRoute = express.Router();
