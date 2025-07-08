@@ -1,4 +1,4 @@
-require("dotenv").config();
+import { config } from "dotenv";
 import express from "express";
 import { env } from "process";
 import v1Route from "./routes";
@@ -6,9 +6,11 @@ import cors from "cors";
 import { kDefaultApiVersion } from "./constants/values";
 import { pageNotFound } from "./middlewares";
 import { requestTempStore } from "./utility";
+import path from "path";
+
+config({ path: path.join(__dirname, "../../../.env") });
 
 const port = env.PORT || 4000;
-
 const app = express();
 
 app.use(express.json());
