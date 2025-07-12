@@ -1,21 +1,20 @@
 import express from "express";
 import { catchSystemRouteError } from "../../../utility/catch-system-error";
 import { Response } from "../../../constants";
-import { prismaClient } from "../../../utility";
+import { kAdminMail, prismaClient } from "../../../utility";
 
-const VendorsRoute = express.Router();
+const UsersRoute = express.Router();
 
 /**
  * @swagger
- * /vendors:
+ * /users:
  *   get:
  *     tags:
  *       - Vendor
- *     summary: Get all system vendors
- *     description: Retrieves all accounts that have a businessType defined (i.e., vendors).
+ *     summary: Get all system users
  *     responses:
  *       200:
- *         description: List of vendor accounts with services and appointments
+ *         description: List of all accounts
  *         content:
  *           application/json:
  *             schema:
@@ -39,18 +38,17 @@ const VendorsRoute = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-VendorsRoute.get(
+UsersRoute.get(
   "/",
   catchSystemRouteError(async (_req, res) => {
     const vendors = await prismaClient.account.findMany({
-      where: { businessType: { not: null } },
+      where: { email: { not: kAdminMail } },
       select: {
         id: true,
         name: true,
         email: true,
         phoneNumber: true,
         avatarUrl: true,
-        isSuspended: true,
         type: true,
         businessName: true,
         businessType: true,
@@ -103,7 +101,7 @@ VendorsRoute.get(
   })
 );
 
-export default VendorsRoute;
+export default UsersRoute;
 
 /**
  * @swagger

@@ -1,21 +1,21 @@
 import express from "express";
 import { catchSystemRouteError } from "../../../utility/catch-system-error";
-import { Response } from "../../../constants";
-import { prismaClient } from "../../../utility";
+import { ErrorType, Response, SystemError } from "../../../constants";
+import { kAdminMail, prismaClient } from "../../../utility";
+import { ACCOUNT_ID_KEY } from "../../../constants/values";
 
-const VendorsRoute = express.Router();
+const UserSuspensionRoute = express.Router();
 
 /**
  * @swagger
- * /vendors:
+ * /users:
  *   get:
  *     tags:
  *       - Vendor
- *     summary: Get all system vendors
- *     description: Retrieves all accounts that have a businessType defined (i.e., vendors).
+ *     summary: Get all system users
  *     responses:
  *       200:
- *         description: List of vendor accounts with services and appointments
+ *         description: List of all accounts
  *         content:
  *           application/json:
  *             schema:
@@ -39,18 +39,33 @@ const VendorsRoute = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-VendorsRoute.get(
+UserSuspensionRoute.post(
   "/",
-  catchSystemRouteError(async (_req, res) => {
-    const vendors = await prismaClient.account.findMany({
-      where: { businessType: { not: null } },
+  catchSystemRouteError(async (req, res) => {
+    const { userId, suspended }: { userId: string; suspended: boolean } =
+      req.body;
+    const accountId: string = req.store.get(ACCOUNT_ID_KEY);
+
+    const admin = prismaClient.account.findUnique({
+      where: { id: accountId, email: kAdminMail },
+    });
+
+    if (!admin) {
+      throw SystemError.throw(ErrorType.UnAuthorized);
+    }
+
+    const account = await prismaClient.account.update({
+      where: { id: userId },
+      data: {
+        isSuspended: suspended,
+      },
       select: {
         id: true,
         name: true,
         email: true,
         phoneNumber: true,
-        avatarUrl: true,
         isSuspended: true,
+        avatarUrl: true,
         type: true,
         businessName: true,
         businessType: true,
@@ -99,11 +114,11 @@ VendorsRoute.get(
       },
     });
 
-    res.status(200).json(Response.success(vendors));
+    res.status(200).json(Response.success(account));
   })
 );
 
-export default VendorsRoute;
+export default UserSuspensionRoute;
 
 /**
  * @swagger

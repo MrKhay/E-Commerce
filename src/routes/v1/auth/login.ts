@@ -7,17 +7,15 @@ import {
   generateJwtToken,
   prismaClient,
 } from "../../../utility";
-import { addDays, addMonths } from "date-fns";
-import {
-  ACCESS_TOKEN_EXPIRATION_DURATION,
-  EMAIL_TOKEN_EXPIRATION_DURATION,
-} from "../../../constants/values";
+import { addDays } from "date-fns";
+import { ACCESS_TOKEN_EXPIRATION_DURATION } from "../../../constants/values";
 
 const LogInRoute = express.Router();
 
 interface LoginRequestBody {
   email: string;
   password: string;
+  isAdmin: boolean;
 }
 
 /**
@@ -86,10 +84,13 @@ LogInRoute.post(
       select: {
         id: true,
         password: true,
+        isSuspended: true,
       },
     });
 
     if (!account) throw SystemError.throw(ErrorType.AccountNotFound);
+    if (account.isSuspended == true)
+      throw SystemError.throw(ErrorType.AccountSuspended);
     if (!account.password)
       throw SystemError.throw(ErrorType.NewPasswordValueMissing);
 

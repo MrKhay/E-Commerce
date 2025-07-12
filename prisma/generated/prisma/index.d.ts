@@ -40,7 +40,8 @@ export type AppointMent = $Result.DefaultSelection<Prisma.$AppointMentPayload>
 export namespace $Enums {
   export const AccountType: {
   Customer: 'Customer',
-  Vendor: 'Vendor'
+  Vendor: 'Vendor',
+  Admin: 'Admin'
 };
 
 export type AccountType = (typeof AccountType)[keyof typeof AccountType]
@@ -2339,6 +2340,7 @@ export namespace Prisma {
     avatarUrl: string | null
     rating: Decimal | null
     type: $Enums.AccountType | null
+    isSuspended: boolean | null
     businessName: string | null
     businessType: $Enums.BusinessType | null
     createdAt: Date | null
@@ -2354,6 +2356,7 @@ export namespace Prisma {
     avatarUrl: string | null
     rating: Decimal | null
     type: $Enums.AccountType | null
+    isSuspended: boolean | null
     businessName: string | null
     businessType: $Enums.BusinessType | null
     createdAt: Date | null
@@ -2369,6 +2372,7 @@ export namespace Prisma {
     avatarUrl: number
     rating: number
     type: number
+    isSuspended: number
     businessName: number
     businessType: number
     createdAt: number
@@ -2394,6 +2398,7 @@ export namespace Prisma {
     avatarUrl?: true
     rating?: true
     type?: true
+    isSuspended?: true
     businessName?: true
     businessType?: true
     createdAt?: true
@@ -2409,6 +2414,7 @@ export namespace Prisma {
     avatarUrl?: true
     rating?: true
     type?: true
+    isSuspended?: true
     businessName?: true
     businessType?: true
     createdAt?: true
@@ -2424,6 +2430,7 @@ export namespace Prisma {
     avatarUrl?: true
     rating?: true
     type?: true
+    isSuspended?: true
     businessName?: true
     businessType?: true
     createdAt?: true
@@ -2526,6 +2533,7 @@ export namespace Prisma {
     avatarUrl: string | null
     rating: Decimal
     type: $Enums.AccountType
+    isSuspended: boolean
     businessName: string | null
     businessType: $Enums.BusinessType | null
     createdAt: Date
@@ -2560,6 +2568,7 @@ export namespace Prisma {
     avatarUrl?: boolean
     rating?: boolean
     type?: boolean
+    isSuspended?: boolean
     businessName?: boolean
     businessType?: boolean
     createdAt?: boolean
@@ -2580,6 +2589,7 @@ export namespace Prisma {
     avatarUrl?: boolean
     rating?: boolean
     type?: boolean
+    isSuspended?: boolean
     businessName?: boolean
     businessType?: boolean
     createdAt?: boolean
@@ -2595,6 +2605,7 @@ export namespace Prisma {
     avatarUrl?: boolean
     rating?: boolean
     type?: boolean
+    isSuspended?: boolean
     businessName?: boolean
     businessType?: boolean
     createdAt?: boolean
@@ -2610,13 +2621,14 @@ export namespace Prisma {
     avatarUrl?: boolean
     rating?: boolean
     type?: boolean
+    isSuspended?: boolean
     businessName?: boolean
     businessType?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "phoneNumber" | "password" | "avatarUrl" | "rating" | "type" | "businessName" | "businessType" | "createdAt" | "updatedAt", ExtArgs["result"]["account"]>
+  export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "phoneNumber" | "password" | "avatarUrl" | "rating" | "type" | "isSuspended" | "businessName" | "businessType" | "createdAt" | "updatedAt", ExtArgs["result"]["account"]>
   export type AccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | Account$sessionsArgs<ExtArgs>
     services?: boolean | Account$servicesArgs<ExtArgs>
@@ -2644,6 +2656,7 @@ export namespace Prisma {
       avatarUrl: string | null
       rating: Prisma.Decimal
       type: $Enums.AccountType
+      isSuspended: boolean
       businessName: string | null
       businessType: $Enums.BusinessType | null
       createdAt: Date
@@ -3083,6 +3096,7 @@ export namespace Prisma {
     readonly avatarUrl: FieldRef<"Account", 'String'>
     readonly rating: FieldRef<"Account", 'Decimal'>
     readonly type: FieldRef<"Account", 'AccountType'>
+    readonly isSuspended: FieldRef<"Account", 'Boolean'>
     readonly businessName: FieldRef<"Account", 'String'>
     readonly businessType: FieldRef<"Account", 'BusinessType'>
     readonly createdAt: FieldRef<"Account", 'DateTime'>
@@ -5839,6 +5853,7 @@ export namespace Prisma {
     avatarUrl: 'avatarUrl',
     rating: 'rating',
     type: 'type',
+    isSuspended: 'isSuspended',
     businessName: 'businessName',
     businessType: 'businessType',
     createdAt: 'createdAt',
@@ -5925,16 +5940,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'BusinessType'
+   * Reference to a field of type 'Boolean'
    */
-  export type EnumBusinessTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BusinessType'>
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
   /**
-   * Reference to a field of type 'Boolean'
+   * Reference to a field of type 'BusinessType'
    */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+  export type EnumBusinessTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BusinessType'>
     
 
 
@@ -6025,6 +6040,7 @@ export namespace Prisma {
     avatarUrl?: StringNullableFilter<"Account"> | string | null
     rating?: DecimalFilter<"Account"> | Decimal | DecimalJsLike | number | string
     type?: EnumAccountTypeFilter<"Account"> | $Enums.AccountType
+    isSuspended?: BoolFilter<"Account"> | boolean
     businessName?: StringNullableFilter<"Account"> | string | null
     businessType?: EnumBusinessTypeNullableFilter<"Account"> | $Enums.BusinessType | null
     createdAt?: DateTimeFilter<"Account"> | Date | string
@@ -6044,6 +6060,7 @@ export namespace Prisma {
     avatarUrl?: SortOrderInput | SortOrder
     rating?: SortOrder
     type?: SortOrder
+    isSuspended?: SortOrder
     businessName?: SortOrderInput | SortOrder
     businessType?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -6066,6 +6083,7 @@ export namespace Prisma {
     avatarUrl?: StringNullableFilter<"Account"> | string | null
     rating?: DecimalFilter<"Account"> | Decimal | DecimalJsLike | number | string
     type?: EnumAccountTypeFilter<"Account"> | $Enums.AccountType
+    isSuspended?: BoolFilter<"Account"> | boolean
     businessName?: StringNullableFilter<"Account"> | string | null
     businessType?: EnumBusinessTypeNullableFilter<"Account"> | $Enums.BusinessType | null
     createdAt?: DateTimeFilter<"Account"> | Date | string
@@ -6085,6 +6103,7 @@ export namespace Prisma {
     avatarUrl?: SortOrderInput | SortOrder
     rating?: SortOrder
     type?: SortOrder
+    isSuspended?: SortOrder
     businessName?: SortOrderInput | SortOrder
     businessType?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -6108,6 +6127,7 @@ export namespace Prisma {
     avatarUrl?: StringNullableWithAggregatesFilter<"Account"> | string | null
     rating?: DecimalWithAggregatesFilter<"Account"> | Decimal | DecimalJsLike | number | string
     type?: EnumAccountTypeWithAggregatesFilter<"Account"> | $Enums.AccountType
+    isSuspended?: BoolWithAggregatesFilter<"Account"> | boolean
     businessName?: StringNullableWithAggregatesFilter<"Account"> | string | null
     businessType?: EnumBusinessTypeNullableWithAggregatesFilter<"Account"> | $Enums.BusinessType | null
     createdAt?: DateTimeWithAggregatesFilter<"Account"> | Date | string
@@ -6332,6 +6352,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     rating?: Decimal | DecimalJsLike | number | string
     type: $Enums.AccountType
+    isSuspended?: boolean
     businessName?: string | null
     businessType?: $Enums.BusinessType | null
     createdAt?: Date | string
@@ -6351,6 +6372,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     rating?: Decimal | DecimalJsLike | number | string
     type: $Enums.AccountType
+    isSuspended?: boolean
     businessName?: string | null
     businessType?: $Enums.BusinessType | null
     createdAt?: Date | string
@@ -6370,6 +6392,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: EnumAccountTypeFieldUpdateOperationsInput | $Enums.AccountType
+    isSuspended?: BoolFieldUpdateOperationsInput | boolean
     businessName?: NullableStringFieldUpdateOperationsInput | string | null
     businessType?: NullableEnumBusinessTypeFieldUpdateOperationsInput | $Enums.BusinessType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6389,6 +6412,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: EnumAccountTypeFieldUpdateOperationsInput | $Enums.AccountType
+    isSuspended?: BoolFieldUpdateOperationsInput | boolean
     businessName?: NullableStringFieldUpdateOperationsInput | string | null
     businessType?: NullableEnumBusinessTypeFieldUpdateOperationsInput | $Enums.BusinessType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6408,6 +6432,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     rating?: Decimal | DecimalJsLike | number | string
     type: $Enums.AccountType
+    isSuspended?: boolean
     businessName?: string | null
     businessType?: $Enums.BusinessType | null
     createdAt?: Date | string
@@ -6423,6 +6448,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: EnumAccountTypeFieldUpdateOperationsInput | $Enums.AccountType
+    isSuspended?: BoolFieldUpdateOperationsInput | boolean
     businessName?: NullableStringFieldUpdateOperationsInput | string | null
     businessType?: NullableEnumBusinessTypeFieldUpdateOperationsInput | $Enums.BusinessType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6438,6 +6464,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: EnumAccountTypeFieldUpdateOperationsInput | $Enums.AccountType
+    isSuspended?: BoolFieldUpdateOperationsInput | boolean
     businessName?: NullableStringFieldUpdateOperationsInput | string | null
     businessType?: NullableEnumBusinessTypeFieldUpdateOperationsInput | $Enums.BusinessType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6758,6 +6785,11 @@ export namespace Prisma {
     not?: NestedEnumAccountTypeFilter<$PrismaModel> | $Enums.AccountType
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type EnumBusinessTypeNullableFilter<$PrismaModel = never> = {
     equals?: $Enums.BusinessType | EnumBusinessTypeFieldRefInput<$PrismaModel> | null
     in?: $Enums.BusinessType[] | null
@@ -6804,6 +6836,7 @@ export namespace Prisma {
     avatarUrl?: SortOrder
     rating?: SortOrder
     type?: SortOrder
+    isSuspended?: SortOrder
     businessName?: SortOrder
     businessType?: SortOrder
     createdAt?: SortOrder
@@ -6823,6 +6856,7 @@ export namespace Prisma {
     avatarUrl?: SortOrder
     rating?: SortOrder
     type?: SortOrder
+    isSuspended?: SortOrder
     businessName?: SortOrder
     businessType?: SortOrder
     createdAt?: SortOrder
@@ -6838,6 +6872,7 @@ export namespace Prisma {
     avatarUrl?: SortOrder
     rating?: SortOrder
     type?: SortOrder
+    isSuspended?: SortOrder
     businessName?: SortOrder
     businessType?: SortOrder
     createdAt?: SortOrder
@@ -6872,6 +6907,14 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumAccountTypeFilter<$PrismaModel>
     _max?: NestedEnumAccountTypeFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type EnumBusinessTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -6922,11 +6965,6 @@ export namespace Prisma {
     price?: SortOrder
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type AppointMentCountOrderByAggregateInput = {
     id?: SortOrder
     time?: SortOrder
@@ -6958,14 +6996,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
     userId?: SortOrder
     vendorId?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type AccountCreateNestedOneWithoutSessionsInput = {
@@ -7064,6 +7094,10 @@ export namespace Prisma {
 
   export type EnumAccountTypeFieldUpdateOperationsInput = {
     set?: $Enums.AccountType
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type NullableEnumBusinessTypeFieldUpdateOperationsInput = {
@@ -7206,10 +7240,6 @@ export namespace Prisma {
     create?: XOR<AccountCreateWithoutAppointmentsAsVendorInput, AccountUncheckedCreateWithoutAppointmentsAsVendorInput>
     connectOrCreate?: AccountCreateOrConnectWithoutAppointmentsAsVendorInput
     connect?: AccountWhereUniqueInput
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type AccountUpdateOneRequiredWithoutAppointmentsAsUserNestedInput = {
@@ -7380,6 +7410,11 @@ export namespace Prisma {
     not?: NestedEnumAccountTypeFilter<$PrismaModel> | $Enums.AccountType
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedEnumBusinessTypeNullableFilter<$PrismaModel = never> = {
     equals?: $Enums.BusinessType | EnumBusinessTypeFieldRefInput<$PrismaModel> | null
     in?: $Enums.BusinessType[] | null
@@ -7413,6 +7448,14 @@ export namespace Prisma {
     _max?: NestedEnumAccountTypeFilter<$PrismaModel>
   }
 
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type NestedEnumBusinessTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.BusinessType | EnumBusinessTypeFieldRefInput<$PrismaModel> | null
     in?: $Enums.BusinessType[] | null
@@ -7421,19 +7464,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedEnumBusinessTypeNullableFilter<$PrismaModel>
     _max?: NestedEnumBusinessTypeNullableFilter<$PrismaModel>
-  }
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type AccountCreateWithoutSessionsInput = {
@@ -7445,6 +7475,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     rating?: Decimal | DecimalJsLike | number | string
     type: $Enums.AccountType
+    isSuspended?: boolean
     businessName?: string | null
     businessType?: $Enums.BusinessType | null
     createdAt?: Date | string
@@ -7463,6 +7494,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     rating?: Decimal | DecimalJsLike | number | string
     type: $Enums.AccountType
+    isSuspended?: boolean
     businessName?: string | null
     businessType?: $Enums.BusinessType | null
     createdAt?: Date | string
@@ -7497,6 +7529,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: EnumAccountTypeFieldUpdateOperationsInput | $Enums.AccountType
+    isSuspended?: BoolFieldUpdateOperationsInput | boolean
     businessName?: NullableStringFieldUpdateOperationsInput | string | null
     businessType?: NullableEnumBusinessTypeFieldUpdateOperationsInput | $Enums.BusinessType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7515,6 +7548,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: EnumAccountTypeFieldUpdateOperationsInput | $Enums.AccountType
+    isSuspended?: BoolFieldUpdateOperationsInput | boolean
     businessName?: NullableStringFieldUpdateOperationsInput | string | null
     businessType?: NullableEnumBusinessTypeFieldUpdateOperationsInput | $Enums.BusinessType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7749,6 +7783,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     rating?: Decimal | DecimalJsLike | number | string
     type: $Enums.AccountType
+    isSuspended?: boolean
     businessName?: string | null
     businessType?: $Enums.BusinessType | null
     createdAt?: Date | string
@@ -7767,6 +7802,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     rating?: Decimal | DecimalJsLike | number | string
     type: $Enums.AccountType
+    isSuspended?: boolean
     businessName?: string | null
     businessType?: $Enums.BusinessType | null
     createdAt?: Date | string
@@ -7801,6 +7837,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: EnumAccountTypeFieldUpdateOperationsInput | $Enums.AccountType
+    isSuspended?: BoolFieldUpdateOperationsInput | boolean
     businessName?: NullableStringFieldUpdateOperationsInput | string | null
     businessType?: NullableEnumBusinessTypeFieldUpdateOperationsInput | $Enums.BusinessType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7819,6 +7856,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: EnumAccountTypeFieldUpdateOperationsInput | $Enums.AccountType
+    isSuspended?: BoolFieldUpdateOperationsInput | boolean
     businessName?: NullableStringFieldUpdateOperationsInput | string | null
     businessType?: NullableEnumBusinessTypeFieldUpdateOperationsInput | $Enums.BusinessType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7837,6 +7875,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     rating?: Decimal | DecimalJsLike | number | string
     type: $Enums.AccountType
+    isSuspended?: boolean
     businessName?: string | null
     businessType?: $Enums.BusinessType | null
     createdAt?: Date | string
@@ -7855,6 +7894,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     rating?: Decimal | DecimalJsLike | number | string
     type: $Enums.AccountType
+    isSuspended?: boolean
     businessName?: string | null
     businessType?: $Enums.BusinessType | null
     createdAt?: Date | string
@@ -7878,6 +7918,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     rating?: Decimal | DecimalJsLike | number | string
     type: $Enums.AccountType
+    isSuspended?: boolean
     businessName?: string | null
     businessType?: $Enums.BusinessType | null
     createdAt?: Date | string
@@ -7896,6 +7937,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     rating?: Decimal | DecimalJsLike | number | string
     type: $Enums.AccountType
+    isSuspended?: boolean
     businessName?: string | null
     businessType?: $Enums.BusinessType | null
     createdAt?: Date | string
@@ -7930,6 +7972,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: EnumAccountTypeFieldUpdateOperationsInput | $Enums.AccountType
+    isSuspended?: BoolFieldUpdateOperationsInput | boolean
     businessName?: NullableStringFieldUpdateOperationsInput | string | null
     businessType?: NullableEnumBusinessTypeFieldUpdateOperationsInput | $Enums.BusinessType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7948,6 +7991,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: EnumAccountTypeFieldUpdateOperationsInput | $Enums.AccountType
+    isSuspended?: BoolFieldUpdateOperationsInput | boolean
     businessName?: NullableStringFieldUpdateOperationsInput | string | null
     businessType?: NullableEnumBusinessTypeFieldUpdateOperationsInput | $Enums.BusinessType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7977,6 +8021,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: EnumAccountTypeFieldUpdateOperationsInput | $Enums.AccountType
+    isSuspended?: BoolFieldUpdateOperationsInput | boolean
     businessName?: NullableStringFieldUpdateOperationsInput | string | null
     businessType?: NullableEnumBusinessTypeFieldUpdateOperationsInput | $Enums.BusinessType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7995,6 +8040,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: EnumAccountTypeFieldUpdateOperationsInput | $Enums.AccountType
+    isSuspended?: BoolFieldUpdateOperationsInput | boolean
     businessName?: NullableStringFieldUpdateOperationsInput | string | null
     businessType?: NullableEnumBusinessTypeFieldUpdateOperationsInput | $Enums.BusinessType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

@@ -9,6 +9,7 @@ export enum ErrorType {
   UnAuthorized,
   AccountNotFound,
   PasswordMismatch,
+  AccountSuspended,
 
   // User Validation
   NameValueMissing,
@@ -191,17 +192,20 @@ export function handleSystemError<T extends ErrorType>(
     case ErrorType.AppointmentNotFound:
       return { statusCode: 404, message: "Appointment not found", code: 5002 };
     case ErrorType.UserIdMissing:
-      return { statusCode: 400, message: "Missing user ID", code: 5003 };
+      return { statusCode: 500, message: "Missing user ID", code: 5003 };
 
     case ErrorType.RefreshTokenValueMissing:
       return { statusCode: 400, message: "Missing refresh token", code: 6001 };
     case ErrorType.FCMTokenValueMissing:
-      return { statusCode: 400, message: "Missing FCM token", code: 6002 };
+      return { statusCode: 500, message: "Missing FCM token", code: 6002 };
 
     case ErrorType.RequestBodyMissing:
-      return { statusCode: 400, message: "Request body missing", code: 7001 };
+      return { statusCode: 500, message: "Request body missing", code: 7001 };
     case ErrorType.InvalidDateFormat:
-      return { statusCode: 400, message: "Invalid date format", code: 7002 };
+      return { statusCode: 500, message: "Invalid date format", code: 7002 };
+
+    case ErrorType.AccountSuspended:
+      return { statusCode: 500, message: "Account suspended", code: 7003 };
 
     case ErrorType.RateLimitExceeded:
       return {

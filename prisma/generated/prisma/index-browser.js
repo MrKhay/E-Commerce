@@ -136,6 +136,7 @@ exports.Prisma.AccountScalarFieldEnum = {
   avatarUrl: 'avatarUrl',
   rating: 'rating',
   type: 'type',
+  isSuspended: 'isSuspended',
   businessName: 'businessName',
   businessType: 'businessType',
   createdAt: 'createdAt',
@@ -174,7 +175,8 @@ exports.Prisma.NullsOrder = {
 };
 exports.AccountType = exports.$Enums.AccountType = {
   Customer: 'Customer',
-  Vendor: 'Vendor'
+  Vendor: 'Vendor',
+  Admin: 'Admin'
 };
 
 exports.BusinessType = exports.$Enums.BusinessType = {

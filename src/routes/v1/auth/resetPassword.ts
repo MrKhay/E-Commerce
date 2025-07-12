@@ -1,8 +1,4 @@
 import express from "express";
-import { catchSystemRouteError } from "../../../utility/catch-system-error";
-import { ErrorType, Response, SystemError } from "../../../constants";
-import { decodeJwtToken, generateHash, prismaClient } from "../../../utility";
-import { isAfter } from "date-fns";
 
 const ResetPasswordRoute = express.Router();
 

@@ -1,7 +1,7 @@
 import express from "express";
 import { catchSystemRouteError } from "../../../utility/catch-system-error";
 import { Response } from "../../../constants";
-import { prismaClient } from "../../../utility";
+import { kAdminMail, prismaClient } from "../../../utility";
 import { ACCOUNT_ID_KEY } from "../../../constants/values";
 import { authMiddleware } from "../../../middlewares";
 
@@ -59,6 +59,7 @@ AccountRoute.get(
         phoneNumber: true,
         avatarUrl: true,
         type: true,
+        isSuspended: true,
         businessName: true,
         businessType: true,
         rating: true,
@@ -110,6 +111,7 @@ AccountRoute.get(
     res.status(200).json(
       Response.success({
         ...account,
+        isAdmin: account?.email == kAdminMail,
       })
     );
   })
@@ -134,6 +136,7 @@ AccountRoute.patch(
         id: true,
         name: true,
         email: true,
+        isSuspended: true,
         phoneNumber: true,
         avatarUrl: true,
         type: true,

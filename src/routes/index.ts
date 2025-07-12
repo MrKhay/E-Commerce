@@ -6,6 +6,8 @@ import AuthRoute from "./v1/auth";
 import VendorServiceRoute from "./v1/service";
 import AccountRoute from "./v1/account";
 import VendorsRoute from "./v1/vendors";
+import UsersRoute from "./v1/users";
+import UserSuspensionRoute from "./v1/users/suspend";
 
 const v1Route = express.Router();
 
@@ -52,6 +54,9 @@ v1Route.use("/auth", AuthRoute);
 v1Route.use("/vendors", VendorsRoute);
 
 v1Route.use("/vendor/service", VendorServiceRoute);
+
+v1Route.use("/users", UsersRoute);
+v1Route.use("/users/suspension", UserSuspensionRoute);
 
 export default v1Route;
 
